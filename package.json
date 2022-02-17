@@ -1,0 +1,26 @@
+{
+  "name": "vonage-connect-dialog-flow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vonage/server-sdk": "^2.10.10",
+    "aws-sdk": "^2.1074.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dot-env": "^0.0.1",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "gunzip-stream": "^1.0.1",
+    "localtunnel": "^2.0.2",
+    "morgan": "^1.10.0",
+    "uuid": "^8.3.2",
+    "ws": "^8.5.0"
+  }
+}
