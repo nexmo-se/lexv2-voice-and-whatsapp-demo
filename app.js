@@ -11,6 +11,9 @@ const https = require('https');
 var request = require('request');
 const voice_handler = require('./voice-handler');
 const { v4: uuidv4 } = require('uuid');
+const WebSocketServer = require('ws').Server;
+const server = require('http').createServer();
+
 const lex = require('./lexV2connect')
 
 const port = process.env.PORT;
@@ -27,10 +30,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-var WebSocketServer = require('ws').Server;
-
-var wss = new WebSocketServer({ port: 8080, host: "0.0.0.0" });
+var wss = new WebSocketServer({ server: server });
 wss.on('connection', function connection(ws) {
   sessid=uuidv4();
   lex.recognizeTextUtterance("hi",sessid,(data)=>{
@@ -40,9 +40,9 @@ wss.on('connection', function connection(ws) {
   voice_handler.process_audio(ws, sessid, intentHandler, lex)
   ws.send('something');
 
-  ws.on('close', (error)=>{
+  ws.on('close', (data)=>{
     console.log("close")
-    console.log(error)
+    console.log(data)
   }
   )
 });
@@ -57,8 +57,6 @@ function textIntentHandler(data) {
   console.log(data);
 }
 
-
-
 const ncco = [
   {
     "action": "connect",
@@ -66,7 +64,7 @@ const ncco = [
     "endpoint": [
       {
         "type": "websocket",
-        "uri": "wss://bjtestvonage01ws.loca.lt",
+        "uri": "wss://bjtestvonage01.loca.lt",
         "content-type": "audio/l16;rate=16000",
       }
     ],
@@ -136,28 +134,18 @@ app.get('/webhooks/call-events', (req, res) => {
 app.post('/webhooks/messaging-events', (req, res) => {
   res.json("events");
 });
+server.on('request', app)
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Answering Machine Demo app listening on port ${port}`)
   console.log(``)
-})
-
+});
 
 const localtunnel = require('localtunnel');
 (async () => {
   const tunnel = await localtunnel({
     subdomain: "bjtestvonage01",
     port: 3000
-  });
-  console.log(`App available at: ${tunnel.url}`);
-})();
-
-const localtunnel2 = require('localtunnel');
-const { LexModelsV2 } = require('aws-sdk');
-(async () => {
-  const tunnel = await localtunnel({
-    subdomain: "bjtestvonage01ws",
-    port: 8080
   });
   console.log(`App available at: ${tunnel.url}`);
 })();
