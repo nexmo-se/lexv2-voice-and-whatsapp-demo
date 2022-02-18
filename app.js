@@ -1,3 +1,4 @@
+console.log("Starting LexV2 Voice and Messaging Demo")
 require('dotenv').config();
 const Vonage = require("@vonage/server-sdk");
 const express = require('express');
@@ -137,7 +138,7 @@ app.post('/webhooks/messaging-events', (req, res) => {
 server.on('request', app)
 
 server.listen(port, () => {
-  console.log(`LevV2 demo app listening on port ${port}`)
+  console.log(`LevV2 Voice and Messaging Demo app listening on port ${port}`)
   console.log(``)
 });
 
