@@ -108,8 +108,8 @@ app.post('/webhooks/inbound-messaging', (req, res) => {
           headers: headers,
           body: JSON.stringify(dataString),
           auth: {
-              'user': '3b8791fd',
-              'pass': 'M1laUW5wECACPeg3'
+              'user': '',
+              'pass': ''
           }
       };
       
