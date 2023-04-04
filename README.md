@@ -26,7 +26,7 @@ To create your application using the Dashboard:
     
 4.  Under  **Capabilities**  select the  **Messages** and **Voice** button.
     
-5.  In the  **Inbound URL**  box, set method to POST, and enter the URL for your inbound message webhook, for example,  `https://YOUR_APP_URL/webhooks/inbound-message`.
+5.  In the  **Inbound URL**  box, set method to POST, and enter the URL for your inbound message webhook, for example,  `https://YOUR_APP_URL/webhooks/inbound-messaging`.
 6.  In the  **Answer URL**  box, set method to GET, enter the URL for your inbound message webhook, for example,  `https://YOUR_APP_URL/webhooks/inbound-call`.
     
 7.  In the  **Status URL**  box, set method to POST, enter the URL for your message status webhook, for example,  `https://YOUR_APP_URL/webhooks/messaging-events`.
